@@ -1,0 +1,22 @@
+<p>
+  login!
+</p>
+<form [formGroup]="loginGroup" (ngSubmit)="formSubmit()">
+<div>
+  <label for="usuario">
+    Usuario
+  </label>
+  <input id="usuario" type="text" formControlName="usuario" />
+</div>
+
+<div>
+  <label for="password">
+    Password
+  </label>
+  <input id="password" type="text" formControlName="password"/>
+</div>
+
+<button class="button" type="submit">Log In</button>
+
+<h4 *ngIf="errMsg">{{errMsg}}</h4>
+</form>
