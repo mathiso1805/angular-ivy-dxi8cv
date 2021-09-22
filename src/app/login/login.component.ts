@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginGroup = this.formBuilder.group({
-      usuario: 'rigoberta',
-      password: 'menchu'
+      
     });
    }
 
