@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { RegistrarComponent } from './registrar/registrar.component';
+
+
 
 @NgModule({
   imports:      [ 
@@ -16,13 +21,18 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent }
+      { path: '', component: LoginComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'registrar', component: RegistrarComponent }
     ])
   ],
   declarations: [ 
     AppComponent, 
     HelloComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    TopBarComponent,
+    RegistrarComponent
   ],
   bootstrap:    [ AppComponent ]
 })

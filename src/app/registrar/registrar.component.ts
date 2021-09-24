@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-registrar',
+  templateUrl: './registrar.component.html',
+  styleUrls: ['./registrar.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginGroup;
+export class RegistrarComponent implements OnInit {
+
+  registrarGroup;
   errMsg: any;
 
   constructor( 
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ) {
-    this.loginGroup = this.formBuilder.group({
+    this.registrarGroup = this.formBuilder.group({
       usuario: '',
       password: ''
     });
@@ -28,17 +29,16 @@ export class LoginComponent implements OnInit {
 
   formSubmit() {
     this.errMsg = '';
-    const { usuario, password } = this.loginGroup.value;
-    this.userService.login(usuario, password).subscribe(
+    const { usuario, password } = this.registrarGroup.value;
+    this.userService.register(usuario, password).subscribe(
       user => {
         this.userService.setUser(user);
         console.log(user);
         this.router.navigate(['/dashboard']);
       },
-      ({ error: { mensaje } }) => {
+      ({ Error: { mensaje } }) => {
         this.errMsg = mensaje;
       }
     );
   }
-
 }
