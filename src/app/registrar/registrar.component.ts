@@ -36,7 +36,7 @@ export class RegistrarComponent implements OnInit {
         console.log(user);
         this.router.navigate(['/dashboard']);
       },
-      ({ Error: { mensaje } }) => {
+      ({ error: { mensaje } }) => {
         this.errMsg = mensaje;
       }
     );
