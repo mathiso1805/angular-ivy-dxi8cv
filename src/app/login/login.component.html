@@ -1,6 +1,6 @@
-<p>
-  login!
-</p>
+<h3>
+  Login!
+</h3>
 <form [formGroup]="loginGroup" (ngSubmit)="formSubmit()">
 <div>
   <label for="usuario">
@@ -17,8 +17,11 @@
 </div>
 
 
-
 <button class="button" type="submit">Log In</button>
+
+<div>
+  <a [routerLink]="['/registrar']" class="button fancy-button"><i class="material-icons">person_add</i>Registrar</a>
+</div>
 
 <h3 *ngIf="errMsg">{{errMsg}}</h3>
 </form>
