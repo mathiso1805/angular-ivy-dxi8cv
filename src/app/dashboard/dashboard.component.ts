@@ -7,8 +7,16 @@ import { PaquetesService } from '../paquetes.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  paquetes = this.paqueteService.getPaquetesApi();
+  errMsg: any;
+  paquetes = this.paqueteService.getPaquetesApi().subscribe(
+  paquete => {
+    this.paqueteService.setPaquetes(paquete);
+    console.log(paquete);
+  },
+  ({ error: { mensaje } }) => {
+    this.errMsg = mensaje;
+  }
+);;
 
   constructor(private paqueteService: PaquetesService) {}
 

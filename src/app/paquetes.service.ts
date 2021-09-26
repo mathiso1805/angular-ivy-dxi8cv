@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
+import { Paquete } from './paquete';
 
 @Injectable({
     providedIn: 'root'
   })
 export class PaquetesService {
-  paquetes : [];
+  paquetes : Paquete[] = [];
   apikey : any;
   //user: UserService;
 
@@ -32,5 +33,6 @@ export class PaquetesService {
       headers
     });
   }
+
 
 }

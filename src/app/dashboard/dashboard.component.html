@@ -2,10 +2,11 @@
 dashboard!
 </p>
 
-<div *ngFor="let paquete of paquetes">
+<h4 *ngIf="!paquetes">No hay paquetes</h4>
 
-  <h3>{{ paquete.destinos.nombre }}</h3>
 
-  <button (click)="share()">Share</button>
+<div> *ngFor="let paquete of paquetes">
+
+<h3> paquete.destinos.nombre }}</h3>
 
 </div>
