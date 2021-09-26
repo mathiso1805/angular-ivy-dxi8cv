@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaquetesService } from '../paquetes.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  paquetes = this.paqueteService.getPaquetesApi();
+
+  constructor(private paqueteService: PaquetesService) {}
 
   ngOnInit() {
   }

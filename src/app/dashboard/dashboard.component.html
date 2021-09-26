@@ -1,3 +1,11 @@
 <p>
 dashboard!
 </p>
+
+<div *ngFor="let paquete of paquetes">
+
+  <h3>{{ paquete.destinos.nombre }}</h3>
+
+  <button (click)="share()">Share</button>
+
+</div>
