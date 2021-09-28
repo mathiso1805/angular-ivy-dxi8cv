@@ -9,11 +9,10 @@ import { Paquete } from './paquete';
 export class PaquetesService {
   paquetes : Paquete[] = [];
   apikey : any;
-  //user: UserService;
+  user: UserService;
 
   constructor(private http: HttpClient) { 
-    //this.apikey = getApiKey();
-    //this.user = this.user.getApiKey();
+    this.apikey = this.user?.getApiKey();
   }
 
   setPaquetes(paquetes: any) {
@@ -27,7 +26,7 @@ export class PaquetesService {
   
 
   getPaquetesApi() {
-    const headers = { 'Content-type': 'application/json'};//, 'apikey' : this.apikey 
+    const headers = { 'Content-type': 'application/json', 'apikey' : this.apikey};//, 'apikey' : this.apikey 
     
     return this.http.get('https://destinos.develotion.com/paquetes.php', {
       headers

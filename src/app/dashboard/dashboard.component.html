@@ -5,8 +5,8 @@ dashboard!
 <h4 *ngIf="!paquetes">No hay paquetes</h4>
 
 
-<div> *ngFor="let paquete of paquetes">
+<div *ngFor="let paquete of paquetes">
 
-<h3> paquete.destinos.nombre }}</h3>
+<h3>{{ paquete.destinos.nombre }}</h3>
 
 </div>
