@@ -27,7 +27,7 @@ export class PaquetesService {
 
   getPaquetesApi() {
     const headers = { 'Content-type': 'application/json', 'apikey' : this.apikey};//, 'apikey' : this.apikey 
-    
+    console.log(this.apikey);
     return this.http.get('https://destinos.develotion.com/paquetes.php', {
       headers
     });
