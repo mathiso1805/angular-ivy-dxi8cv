@@ -42,11 +42,11 @@ dashboard!
     Paquete: {{ ventas.id_paquete }} <br>
     Mayores: {{ ventas.cantidad_mayores }} <br>
     Menores: {{ ventas.cantidad_menores }} <br>
-    <p *ngFor="let paquete of paquete"> 
-      <h3 *ngIf="paquete.id_paquete == ventas.id_paquete"> Precio Final: {{ paquete.precio_mayor }} * 
-        {{ ventas.cantidad_mayores }} + {{ paquete.precio_menores }} * 
+    <p *ngFor="let paquetes of paquetes"> 
+      <h3 *ngIf="paquetes.id_paquete = ventas.id_paquete"> Precio Final: {{ paquetes.precio_mayor }} * 
+        {{ ventas.cantidad_mayores }} + {{ paquetes.precio_menor }} * 
         {{ ventas.cantidad_menores }}</h3>
-    </p>
+    
     <hr>
   </div>
   <h4 *ngIf="!ventas">No hay ventas</h4>
