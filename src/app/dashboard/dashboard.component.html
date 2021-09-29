@@ -2,11 +2,53 @@
 dashboard!
 </p>
 
-<h4 *ngIf="!paquetes">No hay paquetes</h4>
 
 
-<div *ngFor="let paquete of paquetes">
 
-<h3>{{ paquete.destinos.nombre }}</h3>
+<div id="agregarVenta">
+  <h4>Agregar venta</h4>
+  <h4 *ngIf="!paquetes">No hay paquetes</h4>
+  <form [formGroup]="ventaPaqueteGroup" (ngSubmit)="ventaSubmit()">
+    <label for="cliente">
+      Nombre Cliente
+    </label>
+    <input id="cliente" type="text" formControlName="cliente" />  
+    
+    <label for="paquete">
+      Paquete
+    </label>
+    <select name="mipaquete" [(ngModel)]="paquetes" formControlName="mipaquete" >
+      <option  [value]="paquete.id" *ngFor="let paquete of paquetes">{{ paquete.nombre }}</option>
+    </select>
+  
+    <label for="adultos">
+      Adultos
+    </label>
+    <input id="adultos" type="text" formControlName="adultos" />  
+    <label for="adultos">
+      Niños
+    </label>
+    <input id="ninios" type="text" formControlName="ninios" />    
+    <p>
+      <button class="button" type="submit">Agregar Venta</button>
+    </p>
+  </form>
 
 </div>
+
+<div id="Ventaa">
+  <h4>Ventas realizadas</h4>
+  <div *ngFor="let ventas of ventas">Cliente: {{ ventas.nombre_cliente }} <br>
+    Paquete: {{ ventas.id_paquete }} <br>
+    Mayores: {{ ventas.cantidad_mayores }} <br>
+    Menores: {{ ventas.cantidad_menores }} <br>
+    <p *ngFor="let paquete of paquete"> 
+      <h3 *ngIf="paquete.id_paquete == ventas.id_paquete"> Precio Final: {{ paquete.precio_mayor }} * 
+        {{ ventas.cantidad_mayores }} + {{ paquete.precio_menores }} * 
+        {{ ventas.cantidad_menores }}</h3>
+    </p>
+    <hr>
+  </div>
+  <h4 *ngIf="!ventas">No hay ventas</h4>
+</div>
+

@@ -8,11 +8,12 @@ import { Paquete } from './paquete';
   })
 export class PaquetesService {
   paquetes : Paquete[] = [];
-  apikey : any;
+  //apikey : any;
   user: UserService;
 
-  constructor(private http: HttpClient) { 
-    this.apikey = this.user?.getApiKey();
+  constructor(
+    private http: HttpClient, 
+    private userService: UserService) { 
   }
 
   setPaquetes(paquetes: any) {
@@ -23,12 +24,34 @@ export class PaquetesService {
     return this.paquetes;
   }
 
-  
-
   getPaquetesApi() {
-    const headers = { 'Content-type': 'application/json', 'apikey' : this.apikey};//, 'apikey' : this.apikey 
-    console.log(this.apikey);
+    const apikey = this.userService.getApiKey(); 
+    const headers = { 'Content-type': 'application/json', 'apikey' : apikey};
+    console.log(apikey);
+     
     return this.http.get('https://destinos.develotion.com/paquetes.php', {
+      headers
+    });
+  }
+
+  getVentas(){
+    const apikey = this.userService.getApiKey(); 
+    const userId = this.userService.getUserId();
+    const headers = { 'Content-type': 'application/json', 'apikey' : apikey};
+    console.log(apikey, userId);
+     
+    return this.http.get(`https://destinos.develotion.com/ventas.php?idVendedor=`+userId, {
+      headers
+    });
+    
+  }
+
+  agregarVenta(nombreCliente: string, idPaquete: Number, cantidadMayores: Number, cantidadMenores: Number) {
+    const apikey = this.userService.getApiKey();
+    const userId = this.userService.getUserId(); 
+    const headers = { 'Content-type': 'application/json' , 'apikey' : apikey};
+    const body = JSON.stringify({ userId, nombreCliente, idPaquete, cantidadMayores, cantidadMenores });
+    return this.http.post('https://destinos.develotion.com/ventas.php', body, {
       headers
     });
   }
