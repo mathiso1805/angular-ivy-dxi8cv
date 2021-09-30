@@ -38,17 +38,40 @@ dashboard!
 
 <div id="Ventaa">
   <h4>Ventas realizadas</h4>
-  <div *ngFor="let ventas of ventas">Cliente: {{ ventas.nombre_cliente }} <br>
-    Paquete: {{ ventas.id_paquete }} <br>
-    Mayores: {{ ventas.cantidad_mayores }} <br>
-    Menores: {{ ventas.cantidad_menores }} <br>
-    <p *ngFor="let paquetes of paquetes"> 
-      <h3 *ngIf="paquetes.id_paquete = ventas.id_paquete"> Precio Final: {{ paquetes.precio_mayor }} * 
-        {{ ventas.cantidad_mayores }} + {{ paquetes.precio_menor }} * 
-        {{ ventas.cantidad_menores }}</h3>
-    
+  <div *ngFor="let venta of ventas">Cliente: {{ venta.nombre_cliente }} <br>
+    Paquete: {{ venta.id_paquete }} <br>
+    Mayores: {{ venta.cantidad_mayores }} <br>
+    Menores: {{ venta.cantidad_menores }} <br>
+    <p *ngFor="let paquete of paquetes"> 
+      <span *ngIf="paquete.id === venta.id_paquete"> Precio Final: {{ paquete.precio_mayor }} * 
+        {{ venta.cantidad_mayores }} + {{ paquete.precio_menor }} * 
+        {{ venta.cantidad_menores }}</span>    
     <hr>
   </div>
   <h4 *ngIf="!ventas">No hay ventas</h4>
 </div>
 
+<div id="VentaCantidad">
+<h4>Cantidad Ventas</h4>
+<h4 *ngIf="ventas">Ventas: {{ ventas.length }} </h4>
+</div>
+
+<div id="PersonasPorDestino">
+<h4>Personas por destino</h4>
+
+</div>
+
+<div id="PreciosDestinos">
+<h4>Precios de Destinos</h4>
+
+</div>
+
+<div id="DestinosTop">
+<h4>Top Destinos</h4>
+
+</div>
+
+<div id="DestinosPromocionar">
+<h4>Destinos a promocionar</h4>
+
+</div>
