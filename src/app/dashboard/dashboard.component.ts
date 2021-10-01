@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaquetesService } from '../paquetes.service';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +14,10 @@ export class DashboardComponent implements OnInit {
   paquetes = [];
   ventas = [];
   ventaPaqueteGroup;
+  venta: any;
 
   constructor(private paqueteService: PaquetesService,
+    private router: Router,
     private formBuilder: FormBuilder) {
       this.ventaPaqueteGroup = this.formBuilder.group({
         cliente: '',
@@ -36,8 +39,12 @@ export class DashboardComponent implements OnInit {
   ventaSubmit() {
     this.errMsg = '';
     const { cliente, mipaquete, adultos, ninios } = this.ventaPaqueteGroup.value;
+    console.log(this.ventaPaqueteGroup.value);
     this.paqueteService.agregarVenta(cliente, mipaquete, adultos, ninios).subscribe(
-      data => {
+      venta => {
+        this.paqueteService.setVenta(venta);
+        console.log(venta);
+        this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
         this.errMsg = mensaje;

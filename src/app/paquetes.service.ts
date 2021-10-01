@@ -8,6 +8,7 @@ import { Paquete } from './paquete';
   })
 export class PaquetesService {
   paquetes : Paquete[] = [];
+  venta : any;
   //apikey : any;
   user: UserService;
 
@@ -22,6 +23,14 @@ export class PaquetesService {
 
   getPaquetes() {
     return this.paquetes;
+  }
+
+  setVenta(venta : any){
+    this.venta = venta;
+  }
+
+  getVenta(){
+    return this.venta;
   }
 
   getPaquetesApi() {
@@ -50,6 +59,8 @@ export class PaquetesService {
     const apikey = this.userService.getApiKey();
     const userId = this.userService.getUserId(); 
     const headers = { 'Content-type': 'application/json' , 'apikey' : apikey};
+    console.log(userId, nombreCliente, idPaquete, cantidadMayores, cantidadMenores);
+    console.log(typeof idPaquete);
     const body = JSON.stringify({ userId, nombreCliente, idPaquete, cantidadMayores, cantidadMenores });
     return this.http.post('https://destinos.develotion.com/ventas.php', body, {
       headers
