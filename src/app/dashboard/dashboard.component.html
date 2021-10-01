@@ -58,7 +58,12 @@ dashboard!
 
 <div id="PersonasPorDestino">
 <h4>Personas por destino</h4>
-
+<apx-chart
+  [series]="chartOptions.series"
+  [chart]="chartOptions.chart"
+  [xaxis]="chartOptions.xaxis"
+  [title]="chartOptions.title"
+></apx-chart>
 </div>
 
 <div id="PreciosDestinos">

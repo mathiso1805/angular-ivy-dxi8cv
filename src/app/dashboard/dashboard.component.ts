@@ -1,7 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PaquetesService } from '../paquetes.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+} from 'ng-apexcharts';
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +30,8 @@ export class DashboardComponent implements OnInit {
   ventas = [];
   ventaPaqueteGroup;
   venta: any;
+  @ViewChild('chart') chart!: ChartComponent;
+  public chartOptions!: Partial<ChartOptions> | any;
 
   constructor(private paqueteService: PaquetesService,
     private router: Router,
@@ -25,6 +42,24 @@ export class DashboardComponent implements OnInit {
         adultos:'',
         ninios:''
       });
+      this.chartOptions = {
+        series: [
+          {
+            name: 'Cantidad',
+            data: [10, 41, 35, 51, 49],
+          },
+        ],
+        chart: {
+          height: 250,
+          type: 'bar',
+        },
+        title: {
+          text: 'Gráfica de Columnas',
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        },
+      };
     }
 
   
