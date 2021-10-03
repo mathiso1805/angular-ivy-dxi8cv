@@ -43,10 +43,25 @@ dashboard!
     Mayores: {{ venta.cantidad_mayores }} <br>
     Menores: {{ venta.cantidad_menores }} <br>
     <p *ngFor="let paquete of paquetes"> 
-      <span *ngIf="paquete.id === venta.id_paquete"> Precio Final: {{ paquete.precio_mayor }} * 
-        {{ venta.cantidad_mayores }} + {{ paquete.precio_menor }} * 
-        {{ venta.cantidad_menores }}</span>    
+      <span *ngIf="paquete.id === venta.id_paquete" > Precio Final: <span onchange="precioFinal()">  </span>
+        {{ paquete.precio_mayor }} * 
+        {{ venta.cantidad_mayores }} + 
+        {{ paquete.precio_menor }} * 
+        {{ venta.cantidad_menores }} </span>    
     <hr>
+    <script>
+    function precioFinal(){
+     var pmayor = {{ paquete.precio_mayor }};
+     var pmenor = {{ paquete.precio_menor }};
+     var cmayor = {{ venta.cantidad_mayores }};
+     var cmenor = {{ venta.cantidad_menores }};
+     
+  
+     var suma = (pmayor * cmayor) + (pmenor * cmenor);
+  
+     console.Log(suma);
+    }
+   </script>
   </div>
   <h4 *ngIf="!ventas">No hay ventas</h4>
 </div>
@@ -56,15 +71,7 @@ dashboard!
 <h4 *ngIf="ventas">Ventas: {{ ventas.length }} </h4>
 </div>
 
-<div id="PersonasPorDestino">
-<h4>Personas por destino</h4>
-<apx-chart
-  [series]="chartOptions.series"
-  [chart]="chartOptions.chart"
-  [xaxis]="chartOptions.xaxis"
-  [title]="chartOptions.title"
-></apx-chart>
-</div>
+
 
 <div id="PreciosDestinos">
 <h4>Precios de Destinos</h4>

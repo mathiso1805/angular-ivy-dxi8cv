@@ -11,7 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { RegistrarComponent } from './registrar/registrar.component';
-
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { PersonasPorDestino } from './personas-por-destino/personas-por-destino.component';
 
 
 
@@ -21,6 +22,7 @@ import { RegistrarComponent } from './registrar/registrar.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgApexchartsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'dashboard', component: DashboardComponent },
@@ -33,7 +35,8 @@ import { RegistrarComponent } from './registrar/registrar.component';
     LoginComponent,
     DashboardComponent,
     TopBarComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    PersonasPorDestino    
   ],
   bootstrap:    [ AppComponent ]
 })

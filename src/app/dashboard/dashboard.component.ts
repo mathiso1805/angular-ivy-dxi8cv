@@ -2,21 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PaquetesService } from '../paquetes.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Paquete } from '../paquete';
+import { Venta } from '../venta';
 
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle,
-} from 'ng-apexcharts';
 
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
-};
 
 @Component({
   selector: 'app-dashboard',
@@ -26,12 +15,13 @@ export type ChartOptions = {
 export class DashboardComponent implements OnInit {
   errMsg: any;
   mensaje: any;
-  paquetes = [];
-  ventas = [];
+  paquetes : Paquete [];
+  ventas : Venta [];
   ventaPaqueteGroup;
   venta: any;
-  @ViewChild('chart') chart!: ChartComponent;
-  public chartOptions!: Partial<ChartOptions> | any;
+  nombreDestinos : [];
+  personasPorDestino : [];
+
 
   constructor(private paqueteService: PaquetesService,
     private router: Router,
@@ -42,24 +32,11 @@ export class DashboardComponent implements OnInit {
         adultos:'',
         ninios:''
       });
-      this.chartOptions = {
-        series: [
-          {
-            name: 'Cantidad',
-            data: [10, 41, 35, 51, 49],
-          },
-        ],
-        chart: {
-          height: 250,
-          type: 'bar',
-        },
-        title: {
-          text: 'Gráfica de Columnas',
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-        },
-      };
+      this.getPaquetes();
+      this.getVentas();
+      this.getPersonasPorDestino();
+      this.getNombreDestinos();
+
     }
 
   
@@ -79,7 +56,8 @@ export class DashboardComponent implements OnInit {
       venta => {
         this.paqueteService.setVenta(venta);
         console.log(venta);
-        this.router.navigate(['/dashboard']);
+        this.ngOnInit();
+        
       },
       ({ error: { mensaje } }) => {
         this.errMsg = mensaje;
@@ -93,9 +71,40 @@ export class DashboardComponent implements OnInit {
       console.log(this.ventas);
       });
   }
+  
+  getNombreDestinos(){
+    //this.nombreDestinos = this.paquetes.slice();
+    
+    this.paquetes.forEach( function(paquete, i, paquetes) {
+      this.nombreDestinos[i] = paquete.nombre;
+      console.log(this.nombreDestinos[i]);
+    });
+    
+  }
+
+  getPersonasPorDestino(){
+    this.ventas.forEach( function(venta, i, ventas) {
+      this.paquetes.forEach( function(paquete, j, paquetes) {
+       if (paquete.id = venta.id_paquete){
+          this.personasPorDestino[j] += venta.cantidad_mayores;
+          this.personasPorDestino[j] += venta.cantidad_menores;
+        }
+        console.log(this.personasPorDestino);
+      })
+    })
+    }; 
+  
 
   ngOnInit() {
     this.getPaquetes();
     this.getVentas();
+    this.getPersonasPorDestino();
+    this.getNombreDestinos();
+    this.ventaPaqueteGroup = this.formBuilder.group({
+      cliente: '',
+      mipaquete: '',
+      adultos:'',
+      ninios:''
+    });
   }
 }
