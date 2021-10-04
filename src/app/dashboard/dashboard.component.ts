@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   getPaquetes(){
     this.paqueteService.getPaquetesApi().subscribe((response)=> {
     this.paquetes = response["destinos"];
-    this.paqueteService.setPaquetes(this.paquetes);
+    //this.paqueteService.setPaquetes(this.paquetes);
     console.log(this.paquetes);   
     });
    }
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
   getVentas(){
     this.paqueteService.getVentas().subscribe((response)=> {
       this.ventas = response["ventas"];
-      this.paqueteService.setVentas(this.ventas);
+      //this.paqueteService.setVentas(this.ventas);
       console.log(this.ventas);
       });
   }
