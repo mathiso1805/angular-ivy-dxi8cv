@@ -13,6 +13,9 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { PersonasPorDestinoComponent } from './personas-por-destino/personas-por-destino.component';
+import { DestinosPromocionarComponent } from './destinos-promocionar/destinos-promocionar.component';
+import { DestinosTopComponent } from './destinos-top/destinos-top.component';
+import { PreciosDestinosComponent } from './precios-destinos/precios-destinos.component';
 
 
 
@@ -27,7 +30,10 @@ import { PersonasPorDestinoComponent } from './personas-por-destino/personas-por
       { path: '', component: LoginComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'registrar', component: RegistrarComponent },
-      { path: 'dashboard', component: PersonasPorDestinoComponent }
+      { path: 'dashboard', component: PersonasPorDestinoComponent },
+      { path: 'dashboard', component: DestinosPromocionarComponent },
+      { path: 'dashboard', component: DestinosTopComponent },
+      { path: 'dashboard', component: PreciosDestinosComponent }
     ])
   ],
   declarations: [ 
@@ -37,7 +43,10 @@ import { PersonasPorDestinoComponent } from './personas-por-destino/personas-por
     DashboardComponent,
     TopBarComponent,
     RegistrarComponent,
-    PersonasPorDestinoComponent    
+    PersonasPorDestinoComponent,
+    DestinosPromocionarComponent,
+    DestinosTopComponent,
+    PreciosDestinosComponent    
   ],
   bootstrap:    [ AppComponent ]
 })
