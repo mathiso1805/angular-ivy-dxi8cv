@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { Paquete } from './paquete';
+import { Venta } from './venta';
 
 @Injectable({
     providedIn: 'root'
   })
 export class PaquetesService {
   paquetes : Paquete[] = [];
+  ventas : Venta [] = [];
   venta : any;
   //apikey : any;
   user: UserService;
@@ -29,6 +31,14 @@ export class PaquetesService {
     this.venta = venta;
   }
 
+  setVentas(ventas : any){
+    this.ventas = ventas;
+  }
+
+  getVentasArr(){
+    return this.ventas;
+  }
+  
   getVenta(){
     return this.venta;
   }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Paquete } from '../paquete';
+import { PaquetesService } from '../paquetes.service';
 import { Venta } from '../venta';
 import {
   ChartComponent,
@@ -29,17 +30,22 @@ export class PersonasPorDestinoComponent implements OnInit {
   venta: any;
   nombreDestinos : [];
   personasPorDestino : [];
+
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions> | any;
 
 
-  constructor() { 
-    
+  constructor(private paqueteService: PaquetesService) { 
+    this.paquetes = paqueteService.getPaquetes();
+    this.ventas = paqueteService.getVentasArr();
+    this.getNombreDestinos();  
+    this.getPersonasPorDestino();
+
     this.chartOptions = {
       series: [
         {
           name: 'Personas',
-          data: [this.personasPorDestino],
+          data: [],
           //[10, 41, 35, 51, 49]
         },
       ],
@@ -62,23 +68,30 @@ export class PersonasPorDestinoComponent implements OnInit {
   }
   
   getNombreDestinos(){
+    
     //this.nombreDestinos = this.paquetes.slice();
-    this.paquetes.forEach( function(paquete, i, paquetes) {
+    console.log('getNombreDestinos');
+    this.paquetes.forEach( function(paquete, i) {
       this.nombreDestinos[i] = paquete.nombre;
-      console.log(this.nombreDestinos[i]);
+      console.log(this.nombreDestinos[i].nombre);
     });
     
   }
-
+//PRECISO TRAERME LAS LISTAS DEL SERVICE 
   getPersonasPorDestino(){
-    this.ventas.forEach( function(venta, i, ventas) {
-      this.paquetes.forEach( function(paquete, j, paquetes) {
-       if (paquete.id = venta.id_paquete){
-          this.personasPorDestino[j] += venta.cantidad_mayores;
-          this.personasPorDestino[j] += venta.cantidad_menores;
-        }
-        console.log(this.personasPorDestino);
+    
+    //if(this.ventas.length() > 0){
+      this.ventas.forEach( function(venta, i) {
+        this.paquetes.forEach( function(paquete, j) {
+        if (paquete.id === venta.id_paquete){
+            this.personasPorDestino[j] += venta.cantidad_mayores;
+            this.personasPorDestino[j] += venta.cantidad_menores;
+          }
+        })
       })
-    })
-  };
+    //}
+    console.log(this.personasPorDestino + 'getPersonasPorDestino');
+    console.log(this.paquetes + ' getPersonasPorDestinoPaquetes');
+  }
+
 }

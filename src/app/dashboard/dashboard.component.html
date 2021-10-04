@@ -43,7 +43,7 @@ dashboard!
     Mayores: {{ venta.cantidad_mayores }} <br>
     Menores: {{ venta.cantidad_menores }} <br>
     <p *ngFor="let paquete of paquetes"> 
-      <span *ngIf="paquete.id === venta.id_paquete" > Precio Final: <span onchange="precioFinal()">  </span>
+      <span *ngIf="paquete.id === venta.id_paquete" > Precio Final: <span onload="precioFinal()">  suma  </span>
         {{ paquete.precio_mayor }} * 
         {{ venta.cantidad_mayores }} + 
         {{ paquete.precio_menor }} * 
@@ -58,13 +58,13 @@ dashboard!
      
   
      var suma = (pmayor * cmayor) + (pmenor * cmenor);
-  
-     console.Log(suma);
     }
    </script>
   </div>
   <h4 *ngIf="!ventas">No hay ventas</h4>
 </div>
+
+<app-personas-por-destino></app-personas-por-destino>
 
 <div id="VentaCantidad">
 <h4>Cantidad Ventas</h4>
