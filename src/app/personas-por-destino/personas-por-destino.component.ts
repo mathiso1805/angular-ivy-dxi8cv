@@ -64,6 +64,7 @@ export class PersonasPorDestinoComponent implements OnInit {
       
     };
     console.log(this.personasPorDestino + 'personas por destino');  
+    console.log(this.nombreDestinos + 'nombres Destinos');
   
   }
 
@@ -83,8 +84,8 @@ export class PersonasPorDestinoComponent implements OnInit {
     this.nombreDestinos = this.paquetes.map(function(paquete) {
         return paquete.nombre;
       });
-      console.log(this.nombreDestinos);
-    console.log(this.paquetes + 'paquetes personas por destino');  
+      //console.log(this.nombreDestinos);
+    //console.log(this.paquetes + 'paquetes personas por destino');  
     });
    }
 
