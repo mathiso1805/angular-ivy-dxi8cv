@@ -28,19 +28,19 @@ export class PersonasPorDestinoComponent implements OnInit {
   ventas : Venta [];
   ventaPaqueteGroup;
   venta: any;
-  nombreDestinos : [];
-  personasPorDestino : [];
+  paquete: any;
+  nombreDestinos : string [];
+  personasPorDestino : number[];
 
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions> | any;
 
 
   constructor(private paqueteService: PaquetesService) { 
-    //this.paquetes = paqueteService.getPaquetes();
-    //this.ventas = paqueteService.getVentasArr();
-    //this.getNombreDestinos();  
-    //this.getPersonasPorDestino();
-
+    
+    this.nombreDestinos = [''];
+    this.personasPorDestino = [0];
+    
     this.chartOptions = {
       series: [
         {
@@ -57,29 +57,34 @@ export class PersonasPorDestinoComponent implements OnInit {
         text: 'Personas por Destino',
       },
       xaxis: {
-        categories: [],
+        categories: [this.nombreDestinos],
         //[this.nombreDestinos]
         //['Jan', 'Feb', 'Mar', 'Apr', 'May'],
       },
+      
     };
+  
+  
   }
 
   ngOnInit() {
     this.ventas = [];
     this.paquetes = [];
-    this.nombreDestinos = [];
-    this.personasPorDestino = [];
+    this.nombreDestinos = [''];
+    this.personasPorDestino = [0];
 
     this.getPaquetes();
     this.getVentas();
-    this.getNombreDestinos();
-    this.getPersonasPorDestino();
     
   }
   getPaquetes(){
     this.paqueteService.getPaquetesApi().subscribe((response)=> {
     this.paquetes = response["destinos"];
     //this.paqueteService.setPaquetes(this.paquetes);
+    this.nombreDestinos = this.paquetes.map(function(paquete) {
+        return paquete.nombre;
+      });
+      console.log(this.nombreDestinos);
     console.log(this.paquetes + 'paquetes personas por destino');  
     });
    }
@@ -88,28 +93,52 @@ export class PersonasPorDestinoComponent implements OnInit {
    getVentas(){
     this.paqueteService.getVentas().subscribe((response)=> {
       this.ventas = response["ventas"];
-      //this.paqueteService.setVentas(this.ventas);
-      console.log(this.ventas + 'ventas personas por destino');
+      this.paqueteService.setVentas(this.ventas);
+      //this.getPersonasPorDestino();
+      for (var i=0; i< this.ventas.length; i++) { 
+        for (var j=0; j < this.paquetes.length; j++){
+          console.log(this.ventas[i].id_paquete + 'ventasidpaquete');
+          console.log(this.paquetes[j].id + 'paquetesid');
+          if (this.paquetes[j].id === this.ventas[i].id_paquete){
+            console.log(this.ventas[i].cantidad_mayores + ' cantMay' + this.paquetes[j].id + ' destino');
+            console.log(this.ventas[j].cantidad_menores + 'cantMen'+ this.paquetes[j].id + ' destino');
+            this.personasPorDestino[this.paquetes[j].id-1] += this.ventas[i].cantidad_mayores;
+            this.personasPorDestino[this.paquetes[j].id-1] += this.ventas[i].cantidad_menores;
+          }
+        }
+      }
+      console.log(this.personasPorDestino + 'personas por destino');
       });
       
   }
 
-  getNombreDestinos(){
-    setTimeout(function(){
+  //getNombreDestinos(){
+  //  setTimeout(function(){
       //this.nombreDestinos = this.paquetes.slice();
-      console.log('getNombreDestinos1');
-      for (let i in this.paquetes) {
+  //    console.log('getNombreDestinos1');
+  //    this.paquetes = [];
+      //for (var i in this.paquetes) {
         //var i=0; i< this.paquetes.length(); i++
-        console.log(this.paquetes[i] + 'dentro del for');
+      //  console.log(i + 'dentro del for'); //this.paquetes[i].nombre +
         
-      }
+      //}
+      //this.nombreDestinos = this.paquetes.map(function(paquete) {
+      //  return paquete.nombre;
+      //});
+      //console.log(this.nombreDestinos);
+      
+   //   console.log(this.paquetes + 'nuevamentePaquetes');
+      //const DestinosNombre = this.paqueteService.getPaquetes().map(function(paquete) {
+      //  return paquete.nombre;
+      //});
+      //console.log(DestinosNombre);
       //this.paquetes.forEach( function(paquetes) {
         //this.nombreDestinos[paquete.id] = paquete.nombre;
       //  console.log(paquetes.nombre);
       //});
-    }, 2000);
-  }
-//PRECISO TRAERME LAS LISTAS DEL SERVICE 
+   // }, 5000);
+//  }
+
   getPersonasPorDestino(){
     setTimeout(function(){
       console.log('getPersonasPorDestino antes del for');
