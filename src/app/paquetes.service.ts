@@ -46,7 +46,7 @@ export class PaquetesService {
   getPaquetesApi() {
     const apikey = this.userService.getApiKey(); 
     const headers = { 'Content-type': 'application/json', 'apikey' : apikey};
-    console.log(apikey);
+    //console.log(apikey);
      
     return this.http.get('https://destinos.develotion.com/paquetes.php', {
       headers
@@ -57,7 +57,7 @@ export class PaquetesService {
     const apikey = this.userService.getApiKey(); 
     const userId = this.userService.getUserId();
     const headers = { 'Content-type': 'application/json', 'apikey' : apikey};
-    console.log(apikey, userId);
+    //console.log(apikey, userId);
      
     return this.http.get(`https://destinos.develotion.com/ventas.php?idVendedor=`+userId, {
       headers
@@ -69,8 +69,7 @@ export class PaquetesService {
     const apikey = this.userService.getApiKey();
     const idVendedor = this.userService.getUserId(); 
     const headers = { 'Content-type': 'application/json' , 'apikey' : apikey};
-    console.log(idVendedor, nombreCliente, idPaquete, cantidadMayores, cantidadMenores);
-    console.log(typeof idPaquete);
+    //console.log(idVendedor, nombreCliente, idPaquete, cantidadMayores, cantidadMenores);
     const body = JSON.stringify({ idVendedor, nombreCliente, idPaquete, cantidadMayores, cantidadMenores });
     return this.http.post('https://destinos.develotion.com/ventas.php', body, {
       headers

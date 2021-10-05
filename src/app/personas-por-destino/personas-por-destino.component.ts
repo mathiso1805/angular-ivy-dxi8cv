@@ -63,9 +63,6 @@ export class PersonasPorDestinoComponent implements OnInit {
       },
       
     };
-    console.log(this.personasPorDestino + 'personas por destino');  
-    console.log(this.nombreDestinos + 'nombres Destinos');
-  
   }
 
   ngOnInit() {
@@ -84,8 +81,6 @@ export class PersonasPorDestinoComponent implements OnInit {
     this.nombreDestinos = this.paquetes.map(function(paquete) {
         return paquete.nombre;
       });
-      //console.log(this.nombreDestinos);
-    //console.log(this.paquetes + 'paquetes personas por destino');  
     });
    }
 
@@ -105,10 +100,30 @@ export class PersonasPorDestinoComponent implements OnInit {
             }        
           }      
         }      
-        console.log(this.personasPorDestino + 'personas por destino');      
-      });        
+        this.setChartOptions();      
+      });         
     }
 
-
+    setChartOptions(){
+      this.chartOptions = {
+        series: [
+          {
+            name: 'Personas',
+            data: this.personasPorDestino,
+          },
+        ],
+        chart: {
+          height: 250,
+          type: 'bar',
+        },
+        title: {
+          text: 'Personas por Destino',
+        },
+        xaxis: {
+          categories: this.nombreDestinos,
+        },
+        
+      };
+    }
     
 }
