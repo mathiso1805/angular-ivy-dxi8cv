@@ -26,7 +26,6 @@ export class PersonasPorDestinoComponent implements OnInit {
 
   paquetes : Paquete [];
   ventas : Venta [];
-  ventaPaqueteGroup;
   venta: any;
   paquete: any;
   nombreDestinos : string [];
@@ -75,6 +74,7 @@ export class PersonasPorDestinoComponent implements OnInit {
     this.getVentas();
     
   }
+  
   getPaquetes(){
     this.paqueteService.getPaquetesApi().subscribe((response)=> {
     this.paquetes = response["destinos"];

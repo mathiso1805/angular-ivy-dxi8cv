@@ -55,8 +55,7 @@ dashboard!
      var pmenor = {{ paquete.precio_menor }};
      var cmayor = {{ venta.cantidad_mayores }};
      var cmenor = {{ venta.cantidad_menores }};
-     
-  
+       
      var suma = (pmayor * cmayor) + (pmenor * cmenor);
     }
    </script>
@@ -71,19 +70,10 @@ dashboard!
 <h4 *ngIf="ventas">Ventas: {{ ventas.length }} </h4>
 </div>
 
+<app-precios-destinos></app-precios-destinos>
 
-
-<div id="PreciosDestinos">
-<h4>Precios de Destinos</h4>
-
-</div>
-
-<div id="DestinosTop">
-<h4>Top Destinos</h4>
-
-</div>
+<app-destinos-top></app-destinos-top>
 
 <div id="DestinosPromocionar">
 <h4>Destinos a promocionar</h4>
-
 </div>

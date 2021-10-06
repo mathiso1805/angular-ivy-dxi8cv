@@ -4,4 +4,5 @@ export interface Paquete {
   foto: string;
   precio_mayor: number;
   precio_menor: number;
+  cantidadVentas: number;
 }
