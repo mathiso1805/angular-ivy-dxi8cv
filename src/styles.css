@@ -11,9 +11,21 @@ body {
   margin: 0;
 }
 
+.scrollable {
+  height: 300px; 
+  overflow-y: auto;
+}
+
 .container {
   display: flex;
   flex-direction: row;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 1px 2px 2px 2px;
+  margin-block: 1px;
+  height: 320px;
 }
 
 router-outlet + * {
@@ -31,8 +43,11 @@ h2 {
 }
 
 h1,
-h2 {
-  font-weight: lighter;
+h2, 
+h3, 
+h4 {
+  color: #2c6979; 
+  margin:2px;
 }
 
 p {
@@ -53,20 +68,25 @@ a:hover {
 
 /* Input */
 
-input {
+input, select {
   font-size: 14px;
   border-radius: 2px;
-  padding: 8px;
+  height: 30px;
+  width: 200px;
   margin-bottom: 16px;
   border: 1px solid #bdbdbd;
+  margin-left: 1px;
+  margin-right: 5px;
+
 }
 
 label {
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 1px;
   display: block;
   text-transform: uppercase;
+  margin-left: 10px;
 }
 
 /* Button */
@@ -74,13 +94,15 @@ label {
 button {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 20px;
   border-radius: 2px;
   font-size: 14px;
   cursor: pointer;
   background-color: #2d6b88;
   color: white;
   border: none;
+  margin-left: 2px;
+  
 }
 
 .button:hover,
@@ -104,7 +126,7 @@ button:disabled {
 
 .fancy-button i.material-icons {
   color: #2d6b88;
-  padding-right: 4px;
+  padding-right: 5px;
 }
 
 app-top-bar {

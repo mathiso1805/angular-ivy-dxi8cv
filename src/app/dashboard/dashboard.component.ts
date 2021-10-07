@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit {
       this.ventaPaqueteGroup = this.formBuilder.group({
         cliente: ['', Validators.required],
         mipaquete: ['', Validators.required],
-        adultos:['', Validators.required],
-        ninios:['', Validators.required]
+        adultos:['', Validators.required, Validators.max(10)],
+        ninios:['', Validators.required, Validators.max(10)]
       });
       //this.getPaquetes();
       //this.getVentas();

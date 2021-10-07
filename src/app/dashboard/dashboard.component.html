@@ -1,71 +1,90 @@
-<p>
-dashboard!
-</p>
 
+<h3>Dashboard</h3>
 
 <div class="container">
 <div class="row">
-  <div class="col">
-    1 of 2
-  </div>
-  <div class="col">
-    2 of 2
-  </div>
-</div>
-
-</div>
-
-<div id="agregarVenta">
-  <h4>Agregar venta</h4>
-  <h4 *ngIf="!paquetes">No hay paquetes</h4>
-  <form [formGroup]="ventaPaqueteGroup" (ngSubmit)="ventaSubmit()">
-    <label for="cliente">
-      Nombre Cliente
-    </label>
-    <input id="cliente" type="text" formControlName="cliente" class="form-control" required/>      
-    
-    <label for="paquete">
-      Paquete
-    </label>
-    <select name="mipaquete" [(ngModel)]="paquetes" formControlName="mipaquete" >
-      <option  [value]="paquete.id" *ngFor="let paquete of paquetes">{{ paquete.nombre }}</option>
-    </select>
+<div class="col">
   
-    <label for="adultos">
-      Adultos
-    </label>
-    <input id="adultos" type="text" formControlName="adultos" />  
-    <label for="adultos">
-      Niños
-    </label>
-    <input id="ninios" type="text" formControlName="ninios" />    
-    <p>
-      <button class="button" type="submit">Agregar Venta</button>
-    </p>
-  </form>
-  <h4 *ngIf="errMsg">{{errMsg}}</h4>
-</div>
-
-<div id="Ventaa">
-  <h4>Ventas realizadas</h4>
-  <div *ngFor="let venta of ventas">Cliente: {{ venta.nombre_cliente }} <br>
-    Paquete: {{ venta.id_paquete }} <br>
-    Mayores: {{ venta.cantidad_mayores }} <br>
-    Menores: {{ venta.cantidad_menores }} <br>
-    Precio Final: {{ venta.precio_final }} <br><br>
+  <div id="agregarVenta" class="card">
+    <h4>Agregar venta</h4>
+    <h4 *ngIf="!paquetes">No hay paquetes</h4>
+    <form [formGroup]="ventaPaqueteGroup" (ngSubmit)="ventaSubmit()">
+      <label for="cliente">
+        Nombre Cliente
+      </label>
+      <input id="cliente" type="text" formControlName="cliente" class="form-control" required/>      
+      
+      <label for="paquete">
+        Paquete
+      </label>
+      <select name="mipaquete" [(ngModel)]="paquetes" formControlName="mipaquete" required>
+      <option [ngValue]="null" disabled >Seleccione un paquete</option>
+        <option [value]="paquete.id" *ngFor="let paquete of paquetes">{{ paquete.nombre }}</option>
+      </select>
+    
+      <label for="adultos">
+        Adultos
+      </label>
+      <input id="adultos" type="number" formControlName="adultos" min="0" max="10"/>  
+      <label for="adultos">
+        Niños
+      </label>
+      <input id="ninios" type="number" formControlName="ninios" min="0" max="10" />    
+      <p>
+        <button class="button" type="submit">Agregar Venta</button>
+      </p>
+    </form>
+    <h4 *ngIf="errMsg">{{errMsg}}</h4>
   </div>
-  <h4 *ngIf="!ventas">No hay ventas</h4>
+
+</div>
+<div class="col">
+  <div class="card">
+    <h4>Ventas realizadas</h4>
+    <div id="Ventaa" class="scrollable" >
+      <div *ngFor="let venta of ventas">Cliente: {{ venta.nombre_cliente }} <br>
+        Paquete: {{ venta.id_paquete }} <br>
+        Mayores: {{ venta.cantidad_mayores }} <br>
+        Menores: {{ venta.cantidad_menores }} <br>
+        Precio Final: {{ venta.precio_final }} <br><br>
+      </div>
+      <h4 *ngIf="!ventas">No hay ventas</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <app-personas-por-destino></app-personas-por-destino>
+    </div>
+  </div>
+  <div class="col">
+    <div id="VentaCantidad"  class="card">
+    <h4>Cantidad Ventas</h4>
+    <br>
+    <label *ngIf="ventas">Ventas: {{ ventas.length }} </label>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div  class="card">
+      
+      <app-precios-destinos></app-precios-destinos>
+    </div>
+  </div>
+  <div class="col"> 
+    <div  class="card">
+      <app-destinos-top></app-destinos-top>
+    </div>
+  </div> 
+</div>
+<div class="col">
+  <div  class="card">
+    <app-destinos-promocionar></app-destinos-promocionar>
+  </div>
 </div>
 
-<app-personas-por-destino></app-personas-por-destino>
-
-<div id="VentaCantidad">
-<h4>Cantidad Ventas</h4>
-<h4 *ngIf="ventas">Ventas: {{ ventas.length }} </h4>
 </div>
 
-<app-precios-destinos></app-precios-destinos>
-
-<app-destinos-top></app-destinos-top>
-
-<app-destinos-promocionar></app-destinos-promocionar>
+</div>
