@@ -11,6 +11,9 @@ body {
   margin: 0;
 }
 
+#titulo{
+  text-align: center;
+}
 .scrollable {
   height: 300px; 
   overflow-y: auto;
@@ -23,10 +26,10 @@ body {
 
 .card {
   background-color: #f0f0f0;
-  padding: 1px 2px 2px 2px;
-  margin-block: 1px;
+  padding: 1px 1px 1px 10px;
   height: 320px;
 }
+
 
 router-outlet + * {
   padding: 0 16px;
@@ -68,15 +71,15 @@ a:hover {
 
 /* Input */
 
-input, select {
+input, select, #cliente {
   font-size: 14px;
   border-radius: 2px;
   height: 30px;
   width: 200px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   border: 1px solid #bdbdbd;
   margin-left: 1px;
-  margin-right: 5px;
+  margin-right: 1px;
 
 }
 
@@ -86,7 +89,7 @@ label {
   margin-bottom: 1px;
   display: block;
   text-transform: uppercase;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 /* Button */

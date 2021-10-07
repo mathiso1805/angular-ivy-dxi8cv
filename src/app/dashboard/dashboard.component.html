@@ -1,5 +1,5 @@
 
-<h3>Dashboard</h3>
+<h3 id="titulo">Dashboard</h3>
 
 <div class="container">
 <div class="row">
@@ -26,7 +26,7 @@
         Adultos
       </label>
       <input id="adultos" type="number" formControlName="adultos" min="0" max="10"/>  
-      <label for="adultos">
+      <label for="ninios">
         Niños
       </label>
       <input id="ninios" type="number" formControlName="ninios" min="0" max="10" />    
@@ -42,11 +42,11 @@
   <div class="card">
     <h4>Ventas realizadas</h4>
     <div id="Ventaa" class="scrollable" >
-      <div *ngFor="let venta of ventas">Cliente: {{ venta.nombre_cliente }} <br>
-        Paquete: {{ venta.id_paquete }} <br>
-        Mayores: {{ venta.cantidad_mayores }} <br>
-        Menores: {{ venta.cantidad_menores }} <br>
-        Precio Final: {{ venta.precio_final }} <br><br>
+      <div *ngFor="let venta of ventas"> <label for="paquete">Cliente: {{ venta.nombre_cliente }} </label>
+        <label for="paquete">Paquete: {{ venta.id_paquete }}</label>  
+        <label for="mayores">Mayores: {{ venta.cantidad_mayores }}</label>
+          <label for="menores">Menores: {{ venta.cantidad_menores }}</label> 
+            <label for="precioFinal">Precio Final: {{ venta.precio_final }}</label> <br>
       </div>
       <h4 *ngIf="!ventas">No hay ventas</h4>
     </div>
