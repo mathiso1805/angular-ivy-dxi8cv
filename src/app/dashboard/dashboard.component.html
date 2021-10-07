@@ -58,33 +58,35 @@
       <app-personas-por-destino></app-personas-por-destino>
     </div>
   </div>
-  <div class="col">
-    <div id="VentaCantidad"  class="card">
-    <h4>Cantidad Ventas</h4>
-    <br>
-    <label *ngIf="ventas">Ventas: {{ ventas.length }} </label>
-    </div>
-  </div>
+
 </div>
 <div class="row">
+<div class="col">
+<div  class="card">
+  <app-precios-destinos></app-precios-destinos>
+</div>
+</div>
+</div>
+
+<div class="row">
   <div class="col">
-    <div  class="card">
-      
-      <app-precios-destinos></app-precios-destinos>
+    <div id="VentaCantidad"  class="card">
+      <h4>Cantidad Ventas</h4>
+      <br>
+      <label *ngIf="ventas">Ventas: {{ ventas.length }} </label>
     </div>
   </div>
+
   <div class="col"> 
     <div  class="card">
       <app-destinos-top></app-destinos-top>
     </div>
   </div> 
 </div>
+<div class="row">
 <div class="col">
-  <div  class="card">
-    <app-destinos-promocionar></app-destinos-promocionar>
-  </div>
+<div  class="card">
+  <app-destinos-promocionar></app-destinos-promocionar>
 </div>
-
 </div>
-
 </div>
