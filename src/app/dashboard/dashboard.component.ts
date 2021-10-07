@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { PaquetesService } from '../paquetes.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Paquete } from '../paquete';
 import { Venta } from '../venta';
@@ -19,17 +19,23 @@ export class DashboardComponent implements OnInit {
   ventas : Venta [];
   ventaPaqueteGroup;
   venta: any;
+  precioFinal : number [];
 
 
 
   constructor(private paqueteService: PaquetesService,
-    private router: Router,
-    private formBuilder: FormBuilder) {
+    private router: Router,   
+    private formBuilder: FormBuilder) 
+    {
+      this.precioFinal = [0];
+      this.ventas = [];
+      this.paquetes = [];
+
       this.ventaPaqueteGroup = this.formBuilder.group({
-        cliente: '',
-        mipaquete: '',
-        adultos:'',
-        ninios:''
+        cliente: ['', Validators.required],
+        mipaquete: ['', Validators.required],
+        adultos:['', Validators.required],
+        ninios:['', Validators.required]
       });
       //this.getPaquetes();
       //this.getVentas();
@@ -50,36 +56,59 @@ export class DashboardComponent implements OnInit {
     this.errMsg = '';
     const { cliente, mipaquete, adultos, ninios } = this.ventaPaqueteGroup.value;
     console.log(this.ventaPaqueteGroup.value);
-    this.paqueteService.agregarVenta(cliente, mipaquete, adultos, ninios).subscribe(
-      venta => {
-        this.paqueteService.setVenta(venta);
-        console.log(venta);
-        this.ngOnInit();
-        
-      },
-      ({ error: { mensaje } }) => {
-        this.errMsg = mensaje;
-      }
-    );
+    
+      if (this.ventaPaqueteGroup.valid)
+      this.paqueteService.agregarVenta(cliente, mipaquete, adultos, ninios).subscribe(
+          venta => {
+            this.paqueteService.setVenta(venta);
+            console.log(venta);
+            //this.ngOnInit();
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(['/dashboard']));
+          },
+          ({ error: { mensaje } }) => {
+            this.errMsg = mensaje;
+          }
+        );
+      else
+        this.errMsg = "Hay datos inválidos en el formulario";
+    
   }
 
   getVentas(){
     this.paqueteService.getVentas().subscribe((response)=> {
       this.ventas = response["ventas"];
-      //this.paqueteService.setVentas(this.ventas);
+      for(var j=0; j < this.ventas.length; j++){       
+        this.precioFinal[j] = 0;      
+      }      
+      for (var i=0; i< this.ventas.length; i++) {         
+        for (var j=0; j < this.paquetes.length; j++){                  
+          if (this.paquetes[j].id === this.ventas[i].id_paquete){
+            this.precioFinal[i] += this.ventas[i].cantidad_mayores * this.paquetes[j].precio_mayor; 
+            this.precioFinal[i] += this.ventas[i].cantidad_menores * this.paquetes[j].precio_menor;
+          }        
+        }      
+      }      
+      //console.log(this.precioFinal + ' precioFinal');
+        for(var j=0; j < this.ventas.length; j++){       
+          this.ventas[j].precio_final = this.precioFinal[j];
+        }
       console.log(this.ventas);
       });
   }
-    
+      
 
   ngOnInit() {
+    this.precioFinal = [0];
+    this.ventas = [];
+    this.paquetes = [];
     this.getPaquetes();
     this.getVentas();
     this.ventaPaqueteGroup = this.formBuilder.group({
-      cliente: '',
-      mipaquete: '',
-      adultos:'',
-      ninios:''
+      cliente: ['', Validators.required],
+      mipaquete: ['', Validators.required],
+      adultos:['', Validators.required],
+      ninios:['', Validators.required]
     });
   }
 }

@@ -3,7 +3,17 @@ dashboard!
 </p>
 
 
+<div class="container">
+<div class="row">
+  <div class="col">
+    1 of 2
+  </div>
+  <div class="col">
+    2 of 2
+  </div>
+</div>
 
+</div>
 
 <div id="agregarVenta">
   <h4>Agregar venta</h4>
@@ -12,7 +22,7 @@ dashboard!
     <label for="cliente">
       Nombre Cliente
     </label>
-    <input id="cliente" type="text" formControlName="cliente" />  
+    <input id="cliente" type="text" formControlName="cliente" class="form-control" required/>      
     
     <label for="paquete">
       Paquete
@@ -33,7 +43,7 @@ dashboard!
       <button class="button" type="submit">Agregar Venta</button>
     </p>
   </form>
-
+  <h4 *ngIf="errMsg">{{errMsg}}</h4>
 </div>
 
 <div id="Ventaa">
@@ -42,23 +52,7 @@ dashboard!
     Paquete: {{ venta.id_paquete }} <br>
     Mayores: {{ venta.cantidad_mayores }} <br>
     Menores: {{ venta.cantidad_menores }} <br>
-    <p *ngFor="let paquete of paquetes"> 
-      <span *ngIf="paquete.id === venta.id_paquete" > Precio Final: <span onload="precioFinal()">  suma  </span>
-        {{ paquete.precio_mayor }} * 
-        {{ venta.cantidad_mayores }} + 
-        {{ paquete.precio_menor }} * 
-        {{ venta.cantidad_menores }} </span>    
-    <hr>
-    <script>
-    function precioFinal(){
-     var pmayor = {{ paquete.precio_mayor }};
-     var pmenor = {{ paquete.precio_menor }};
-     var cmayor = {{ venta.cantidad_mayores }};
-     var cmenor = {{ venta.cantidad_menores }};
-       
-     var suma = (pmayor * cmayor) + (pmenor * cmenor);
-    }
-   </script>
+    Precio Final: {{ venta.precio_final }} <br><br>
   </div>
   <h4 *ngIf="!ventas">No hay ventas</h4>
 </div>
@@ -74,6 +68,4 @@ dashboard!
 
 <app-destinos-top></app-destinos-top>
 
-<div id="DestinosPromocionar">
-<h4>Destinos a promocionar</h4>
-</div>
+<app-destinos-promocionar></app-destinos-promocionar>

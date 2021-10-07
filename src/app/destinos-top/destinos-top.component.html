@@ -1,7 +1,7 @@
 
 <h4>Top Ventas</h4>
 <div *ngFor="let paquete of paquetes">
-  <p *ngIf="paquete.cantidadVentas>3" > 
+<p *ngIf="paquete.cantidadVentas>3" > 
     Destino: {{ paquete.nombre }}  <br>
     Cantidad ventas: {{ paquete.cantidadVentas }}  
   </p>

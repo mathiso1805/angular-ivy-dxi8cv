@@ -46,20 +46,20 @@ export class DestinosTopComponent implements OnInit {
 
   getVentas(){    
     this.paqueteService.getVentas().subscribe((response)=> {
-    this.ventas = response["ventas"];      
-    this.paqueteService.setVentas(this.ventas);
+      this.ventas = response["ventas"];      
+      this.paqueteService.setVentas(this.ventas);
 
-    for(var j=0; j < this.paquetes.length; j++){       
-      this.ventasCantidad[j] = 0;      
-    }      
-    for (var i=0; i< this.ventas.length; i++) {         
-      for (var j=0; j < this.paquetes.length; j++){                  
-        if (this.paquetes[j].id === this.ventas[i].id_paquete){
-          this.ventasCantidad[this.paquetes[j].id-1] += 1;
-        }        
+      for(var j=0; j < this.paquetes.length; j++){       
+        this.ventasCantidad[j] = 0;      
       }      
-    }      
-    console.log(this.ventasCantidad + ' VentasCantidad');
+      for (var i=0; i< this.ventas.length; i++) {         
+        for (var j=0; j < this.paquetes.length; j++){                  
+          if (this.paquetes[j].id === this.ventas[i].id_paquete){
+            this.ventasCantidad[this.paquetes[j].id-1] += 1;
+          }        
+        }      
+      }      
+      //console.log(this.ventasCantidad + ' VentasCantidad');
       for(var j=0; j < this.paquetes.length; j++){       
         this.paquetes[j].cantidadVentas = this.ventasCantidad[j];
       }

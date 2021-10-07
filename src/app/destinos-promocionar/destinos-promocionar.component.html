@@ -1,3 +1,8 @@
-<p>
-destinos-promocionar works!
-</p>
+<h4>Destinos a promocionar</h4>
+
+<div *ngFor="let paquete of paquetes">
+  <p *ngIf="paquete.cantidadVentas===0" > 
+    Destino: {{ paquete.nombre }}  <br>
+    Cantidad ventas: {{ paquete.cantidadVentas }}  
+  </p>
+</div>

@@ -5,4 +5,5 @@ export interface Venta {
   id_paquete: number;
   cantidad_mayores: number;
   cantidad_menores: number;
+  precio_final: number;
 }
